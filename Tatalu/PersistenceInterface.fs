@@ -1,5 +1,4 @@
-﻿module Database
-
+﻿module PersistenceInterface
 open Microsoft.Data.Sqlite
 
 let connection_string = "Data Source=database/tatalu.db"
@@ -39,7 +38,6 @@ let select (sql: string) (inserter: (SqliteCommand -> Unit) option) (parser: Sql
         | false -> list
     
     read reader list
-
 
 let select_all_cards_from_card_by_list_id id = 
     let sql = 
@@ -101,6 +99,3 @@ let select_all_lists_from_list_by_kanban_id id =
         (reader.GetInt32(0), reader.GetString(1))
         
     select sql inserter parser
-
-    
-        
