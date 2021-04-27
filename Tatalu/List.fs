@@ -1,17 +1,9 @@
 ﻿module List
 
-let create id title seq = 
+let create id title kanban_id = 
     {
         DomainTypes.List.id = id;
         DomainTypes.List.title = title;
-        DomainTypes.List.cards = seq;
+        DomainTypes.List.kanban_id = kanban_id;
     }
 
-let debug (list: DomainTypes.List) = 
-    printfn "\t| %i | %s |" list.id list.title
-
-    match list.cards with
-    | None -> printfn ""
-    | Some cd -> 
-        cd
-        |> Map.iter (fun k v -> Card.debug v)

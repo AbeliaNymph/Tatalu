@@ -44,7 +44,8 @@ let select_all_cards_from_card_by_list_id id =
         """
         select
             card.id,
-            card.title
+            card.title,
+            card.list_id
         from
             card
         where
@@ -55,7 +56,7 @@ let select_all_cards_from_card_by_list_id id =
         command.Parameters.AddWithValue("$id", id) |> ignore
 
     let parser (reader: SqliteDataReader) = 
-        (reader.GetInt32(0), reader.GetString(1))
+        (reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2))
 
     select sql (Some inserter) parser
     
@@ -85,7 +86,8 @@ let select_all_lists_from_list_by_kanban_id id =
         """
             select
                 list.id,
-                list.title
+                list.title,
+                list.kanban_id
             from
                 list
             where
@@ -96,6 +98,6 @@ let select_all_lists_from_list_by_kanban_id id =
     let inserter = Some (fun (command: SqliteCommand) -> command.Parameters.AddWithValue("$id", id) |> ignore)
 
     let parser (reader: SqliteDataReader) = 
-        (reader.GetInt32(0), reader.GetString(1))
+        (reader.GetInt32(0), reader.GetString(1), reader.GetInt32(2))
         
     select sql inserter parser

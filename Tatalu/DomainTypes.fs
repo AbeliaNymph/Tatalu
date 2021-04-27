@@ -4,18 +4,19 @@ type Card =
     {
         id: int;
         title: string;
+        list_id: int;
     }
 
 type List = 
     {
         id: int;
         title: string;
-        cards: Map<string, Card> option
+        kanban_id: int;
     }
 
 type Kanban = 
     {
         id: int;
         title: string;
-        lists: Map<string, List> option
+        
     }

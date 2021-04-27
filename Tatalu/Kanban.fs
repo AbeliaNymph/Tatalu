@@ -1,17 +1,12 @@
 ﻿module Kanban
 
-let create id title seq = 
+let create id title =
     {
         DomainTypes.Kanban.id = id;
         DomainTypes.Kanban.title = title;
-        DomainTypes.Kanban.lists = seq;
     }
 
-let debug (kanban: DomainTypes.Kanban) = 
-    printfn "[ %i ][ %s ]" kanban.id kanban.title
-
-    match kanban.lists with
-    | None -> printfn ""
-    | Some kb -> 
-        kb
-        |> Map.iter (fun k v -> List.debug v)
+let load_from_database _ =
+    PersistenceInterface.select_all_kanbans_from_Kanban()
+    |> List.map (fun (id, title) -> create id title)
+    

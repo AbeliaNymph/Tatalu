@@ -1,12 +1,9 @@
 ﻿module Card
 
-
-
-let create id title = 
-    {   
+let create id title list_id = 
+    {
         DomainTypes.Card.id = id;
         DomainTypes.Card.title = title;
+        DomainTypes.Card.list_id = list_id;
     }
 
-let debug (card: DomainTypes.Card) = 
-    printfn "\t\t- %i - %s -" card.id card.title
