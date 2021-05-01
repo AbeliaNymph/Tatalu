@@ -14,6 +14,8 @@
     <Compile Include="Kanban.fs" />
     <Compile Include="PresentationTypes.fs" />
     <Compile Include="PresentationFunctions.fs" />
+    <Compile Include="CardDashboard.fs" />
+    <Compile Include="ListDashboard.fs" />
     <Compile Include="KanbanDashboard.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

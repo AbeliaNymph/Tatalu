@@ -1,36 +1,27 @@
 ﻿module KanbanDashboard
 
 let ofKanbanList kanban_list = 
-    let row_id_width = 
-        kanban_list
-        |> List.fold (fun max_length (kanban: DomainTypes.Kanban) -> 
-            if kanban.id.ToString().Length > max_length then kanban.id.ToString().Length else max_length
-        ) 0
-
-    let row_title_width = 
-        kanban_list
-        |> List.fold (fun max_length (kanban: DomainTypes.Kanban) -> 
-            if kanban.title.Length > max_length then kanban.title.Length else max_length
-        ) 0
-    
     {
-        PresentationTypes.KanbanDashboard.title = "Kanban Dashboard";
-        PresentationTypes.KanbanDashboard.row_width = row_id_width + row_title_width + 3;
-        PresentationTypes.KanbanDashboard.row_id_width = row_id_width;
-        PresentationTypes.KanbanDashboard.row_title_width = row_title_width;
+        PresentationTypes.KanbanDashboard.title = "看板仪表板";
         PresentationTypes.KanbanDashboard.list = kanban_list;
     }
 
+let secondary_verification _ = 
+    printfn "删除列表将删除列表下的所有卡片，此操作不可恢复。确认（y/n）?"
+    
+    match System.Console.ReadLine().ToLower() with
+    | "y" -> true
+    | _ -> false
+
 let display (kanban_dashboard: PresentationTypes.KanbanDashboard) = 
-    printf "%s" PresentationTypes.drawing_down_and_right
+    printfn "# %s" kanban_dashboard.title
     
-    
+    kanban_dashboard.list
+    |> List.rev
+    |> List.iter (fun kanban -> printfn "\t-[编号 = %i][标题 = %s]" kanban.id kanban.title
+    )
 
-    for _ in 1..kanban_dashboard.row_width do
-        printf "%s" PresentationTypes.drawing_horizontal
-
-    printfn "%s" PresentationTypes.drawing_down_and_left
-
-    printf "%s" PresentationTypes.drawing_vertical
-
-    printf "%s" "id"
+let display_result result = 
+    match result with
+    | Ok t -> printfn "%s" t
+    | Error e -> eprintfn "%s" e

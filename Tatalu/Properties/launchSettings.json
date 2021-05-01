@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Tatalu": {
-      "commandName": "Project",
-      "commandLineArgs": "kanban list"
+      "commandName": "Project"
     }
   }
 }

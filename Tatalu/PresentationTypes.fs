@@ -8,8 +8,17 @@ let drawing_down_and_left = "┐"
 type KanbanDashboard = 
     {
         title: string;
-        row_width: int;
-        row_id_width: int;
-        row_title_width: int;
         list: DomainTypes.Kanban list
+    }
+
+type ListDashboard = 
+    {
+        title: string;
+        list: DomainTypes.List list
+    }
+
+type CardDashboard = 
+    {
+        title: string;
+        list: DomainTypes.Card list
     }
